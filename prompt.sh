@@ -131,6 +131,8 @@ function promptcmd()
         lK8SCONTEXT=$(kubectl config view -o template --template='{{ index . "current-context" }}')
 
         if [ -n "$lK8SCONTEXT" ] ; then
+                lK8S=1
+
                 if [ $lGIT -ne 0 ] ; then
                         PS1="${PS1}${cLINES}\342\224\234\342\224\200"
                 else

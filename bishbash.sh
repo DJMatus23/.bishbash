@@ -1,11 +1,13 @@
+#!/bin/bash
+
+dir=$(dirname $BASH_SOURCE)
 
 scriptlist=(
   "prompt.sh"
-  "ssh.sh"
   "history.sh"
 )
 
 for script in "${scriptlist[@]}"
 do
-  source ~/.bishbash/$script
+  source ${dir}/${script}
 done
