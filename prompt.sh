@@ -98,10 +98,13 @@ function promptcmd()
         # git line
         #=========================================================
 
-        if git rev-parse --git-dir > /dev/null 2>&1; then
-                lGIT=1
-        else
-                lGIT=0
+        lGIT=0
+
+        if [ -x "$(command -v git)" ] ;
+        then
+                if git rev-parse --git-dir > /dev/null 2>&1; then
+                        lGIT=1
+                fi
         fi
 
         if [ $lGIT -ne 0 ] ; then
@@ -128,7 +131,10 @@ function promptcmd()
         # k8s line
         #=========================================================
 
-        lK8SCONTEXT=$(kubectl config view -o template --template='{{ index . "current-context" }}')
+        if [ -x "$(command -v kubectl)" ] ;
+        then
+                lK8SCONTEXT=$(kubectl config view -o template --template='{{ index . "current-context" }}')
+        fi
 
         if [ -n "$lK8SCONTEXT" ] ; then
                 lK8S=1
